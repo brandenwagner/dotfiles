@@ -29,3 +29,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 alias docker=podman
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+# nvim specific profiles
+alias notes="NVIM_APPNAME=nvim-notes"
+
