@@ -1,5 +1,5 @@
 return {
-  
+
   -- Configure LazyVim to load catppuccin
   {
     "LazyVim/LazyVim",
@@ -12,7 +12,6 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, { name = "emoji" })
     end,
@@ -53,7 +52,15 @@ return {
       },
     },
   },
-
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -171,5 +178,5 @@ return {
         "flake8",
       },
     },
-  }
+  },
 }
