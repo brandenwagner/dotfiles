@@ -10,6 +10,9 @@ eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 export LANG=en_US.UTF-8
 
+# Setup Zoxide
+eval "$(zoxide init zsh)"
+
 # Activate `fnm`: https://github.com/Schniz/fnm
 if command -v fnm >/dev/null; then
     eval "$(fnm env --use-on-cd)"
