@@ -8,7 +8,7 @@ command_timeout = 1000
 
 [character]
 vicmd_symbol = "[N] >>>"
-success_symbol = '[➜](bold green)'
+success_symbol = '[➜](bold sky)'
 
 [directory.substitutions]
 '~/tests/starship-custom' = 'work-project'

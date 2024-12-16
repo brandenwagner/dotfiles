@@ -2,6 +2,14 @@ return {
 
   -- Configure LazyVim to load catppuccin
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      transparent_background = true,
+    },
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "catppuccin",
@@ -110,8 +118,8 @@ return {
         "javascript",
         "json",
         "lua",
-        "markdown",
-        "markdown_inline",
+        -- "markdown",
+        -- "markdown_inline",
         "python",
         "query",
         "regex",

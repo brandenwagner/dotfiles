@@ -1,0 +1,81 @@
+
+typeset -U path cdpath fpath manpath
+
+# Reevaluate the prompt string each time it's displaying a prompt
+setopt prompt_subst
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+autoload -Uz compinit && compinit
+
+# Add Homebrew to path
+export PATH="/opt/homebrew/bin:$PATH"
+
+# ZSH Autosuggestion
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^w' autosuggest-execute
+bindkey '^e' autosuggest-accept
+bindkey '^u' autosuggest-toggle
+bindkey '^L' vi-forward-word
+bindkey '^k' up-line-or-search
+bindkey '^j' down-line-or-search
+
+# Starship Prompt
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export LANG=en_US.UTF-8
+
+# Setup Zoxide
+eval "$(zoxide init zsh)"
+
+# Activate `fnm`: https://github.com/Schniz/fnm
+if command -v fnm >/dev/null; then
+    eval "$(fnm env --use-on-cd)"
+fi
+
+# Activate `direnv`: https://direnv.net/
+if command -v direnv >/dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
+#Activate `fzf` : https://github.com/junegunn/fzf 
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Add Nix profile to path
+export PATH="$HOME/.nix-profile/bin:$PATH"
+
+
+# So many linux things want this variable that isnt set on darwin systems
+export XDG_CONFIG_HOME="/Users/branden/.config"
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+	. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+# History options should be set in .zshrc and after oh-my-zsh sourcing.
+# See https://github.com/nix-community/home-manager/issues/177.
+HISTSIZE="10000"
+SAVEHIST="10000"
+HISTFILE="$HOME/.zsh_history"
+mkdir -p "$(dirname "$HISTFILE")"
+
+setopt HIST_FCNTL_LOCK
+unsetopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+unsetopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+unsetopt HIST_EXPIRE_DUPS_FIRST
+setopt SHARE_HISTORY
+unsetopt EXTENDED_HISTORY
+
+# Aliases
+alias docker=podman
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+alias notes="NVIM_APPNAME=nvim-notes nvim"
+
+## Eza
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+alias ltree="eza --tree --level=2  --icons --git"
+
+alias mat='osascript -e "tell application \"System Events\" to key code 126 using {command down}" && tmux neww "cmatrix -c blue"'
