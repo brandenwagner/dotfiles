@@ -4,9 +4,11 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
-      dir = "~/Repositories/Personal/obsidian", -- Replace this with the actual path to your Obsidian vault
-      completion = {
-        nvim_cmp = true, -- Enable completion using nvim-cmp
+      workspaces = {
+        {
+          name = "Personal",
+          path = "~/Repositories/Personal/obsidian",
+        },
       },
       mappings = {},
     },

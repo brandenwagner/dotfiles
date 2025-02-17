@@ -17,13 +17,13 @@ return {
   },
 
   -- override nvim-cmp and add cmp-emoji
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-    end,
-  },
+  -- {
+  --  "hrsh7th/nvim-cmp",
+  --  dependencies = { "hrsh7th/cmp-emoji" },
+  --  opts = function(_, opts)
+  --    table.insert(opts.sources, { name = "emoji" })
+  --  end,
+  --},
 
   -- change some telescope options and a keymap to browse plugin files
   {
@@ -60,15 +60,7 @@ return {
       },
     },
   },
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
-    ft = "markdown",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
+  
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",

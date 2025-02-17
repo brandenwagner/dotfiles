@@ -1,11 +1,9 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.editor.harpoon2",
-    "lazyvim.plugins.extras.lang.markdown",
-    "lazyvim.plugins.extras.util.dot"
+
   ],
   "news": {
-    "NEWS.md": "7429"
+    "NEWS.md": "10960"
   },
-  "version": 7
+  "version": 8
 }

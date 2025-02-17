@@ -79,3 +79,6 @@ alias lt="eza --tree --level=2 --long --icons --git"
 alias ltree="eza --tree --level=2  --icons --git"
 
 alias mat='osascript -e "tell application \"System Events\" to key code 126 using {command down}" && tmux neww "cmatrix -c blue"'
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/branden/.lmstudio/bin"
