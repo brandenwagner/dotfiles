@@ -2,3 +2,4 @@
 # Dont want lazy updates locked. I might regret this later but lets try it for now
 lazy-lock.json
 lazyvim.json
+.DS_Store
