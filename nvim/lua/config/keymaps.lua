@@ -3,8 +3,3 @@
 -- Add any additional keymaps here
 
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Map jj to Esc" })
-
--- Toggle snacks explorer
-vim.keymap.set("n", "<leader>e", function()
-  require("snacks").explorer()
-end, { desc = "Toggle Explorer" })
