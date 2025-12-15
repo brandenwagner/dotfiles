@@ -82,3 +82,6 @@ alias mat='osascript -e "tell application \"System Events\" to key code 126 usin
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/branden/.lmstudio/bin"
+
+# Added by Antigravity
+export PATH="/Users/branden/.antigravity/antigravity/bin:$PATH"
