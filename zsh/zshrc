@@ -9,8 +9,13 @@ autoload -Uz compinit && compinit
 # Add Homebrew to path
 export PATH="/opt/homebrew/bin:$PATH"
 
-# ZSH Autosuggestion
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-autosuggestions - works on both Mac (brew) and Ubuntu
+if command -v brew &> /dev/null; then
+    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
 bindkey '^u' autosuggest-toggle
@@ -36,6 +41,11 @@ if command -v direnv >/dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
+# Use fdfind as fd on systems where it's named that way (Debian/Ubuntu)
+if command -v fdfind &> /dev/null && ! command -v fd &> /dev/null; then
+    alias fd='fdfind'
+fi
+
 #Activate `fzf` : https://github.com/junegunn/fzf 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -45,7 +55,14 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 
 
 # So many linux things want this variable that isnt set on darwin systems
-export XDG_CONFIG_HOME="/Users/branden/.config"
+case "$(uname -s)" in
+  Darwin)
+    export XDG_CONFIG_HOME="/Users/branden/.config"
+    ;;
+  Linux)
+    export XDG_CONFIG_HOME="$HOME/.config"
+    ;;
+esac
 
 # Nix
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
