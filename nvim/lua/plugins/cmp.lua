@@ -4,11 +4,11 @@ return {
     dependencies = {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip",
+      -- "L3MON4D3/LuaSnip",
     },
     opts = function(_, opts)
       local cmp = require("cmp")
-      
+
       -- Disable Enter key for completion, only Ctrl-y to confirm
       opts.mapping = opts.mapping or {}
       opts.mapping["<CR>"] = cmp.mapping({
@@ -22,7 +22,7 @@ return {
         s = cmp.mapping.confirm({ select = false }),
         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
       })
-      
+
       -- Setup cmdline completion for ":"
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
@@ -31,6 +31,7 @@ return {
           { name = "cmdline" },
         },
       })
+
       -- Setup cmdline completion for "/"
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),

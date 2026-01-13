@@ -1,0 +1,48 @@
+-- return {
+--   -- Language server, code actions, hover, formatting helpers
+--   {
+--     "mrcjkb/haskell-tools.nvim",
+--     version = "*",
+--     ft = { "haskell", "lhaskell", "cabal", "hs" },
+--     dependencies = { "nvim-lua/plenary.nvim" },
+--     opts = {},
+--   },
+
+--   -- Ensure HLS uses fourmolu for formatting
+--   {
+--     "neovim/nvim-lspconfig",
+--     opts = {
+--       servers = {
+--         hls = {
+--           settings = {
+--             haskell = {
+--               formattingProvider = "fourmolu",
+--             },
+--           },
+--         },
+--       },
+--     },
+--   },
+
+--   -- Install Haskell tools via mason
+--   {
+--     "mason-org/mason.nvim",
+--     opts = function(_, opts)
+--       opts.ensure_installed = opts.ensure_installed or {}
+--       vim.list_extend(opts.ensure_installed, {
+--         "haskell-language-server",
+--         "fourmolu",
+--         "hlint",
+--       })
+--     end,
+--   },
+
+--   -- Treesitter parser
+--   {
+--     "nvim-treesitter/nvim-treesitter",
+--     opts = function(_, opts)
+--       opts.ensure_installed = opts.ensure_installed or {}
+--       vim.list_extend(opts.ensure_installed, { "haskell" })
+--     end,
+--   },
+-- }
