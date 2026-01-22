@@ -28,6 +28,9 @@ eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 export LANG=en_US.UTF-8
 
+# vi mode
+bindkey -v
+
 # Setup Zoxide
 eval "$(zoxide init zsh)"
 
@@ -87,8 +90,13 @@ unsetopt EXTENDED_HISTORY
 
 # Aliases
 alias docker=podman
+alias docker-compose='podman compose'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-alias notes="NVIM_APPNAME=nvim-notes nvim"
+#alias notes="NVIM_APPNAME=nvim-notes nvim $HOME/Repositories/Personal/obsidian"
+
+notes() {
+  NVIM_APPNAME=nvim-notes nvim "${@:-$HOME/Repositories/Personal/obsidian}"
+}
 
 ## Eza
 alias l="eza -l --icons --git -a"
