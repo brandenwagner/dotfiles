@@ -1,8 +1,17 @@
-require("obsidian").setup({
-  workspaces = {
-    {
-      name = "Notes",
-      path = "/Users/omerxx/Obsidian/Notes",
+return {
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    ft = "markdown",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      workspaces = {
+        {
+          name = "Notes",
+          path = "/Users/branden/Repositories/Personal/obsidian",
+        },
+      },
     },
   },
-})
+}
