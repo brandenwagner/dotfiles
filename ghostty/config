@@ -1,0 +1,38 @@
+# Ghostty Configuration
+# Documentation: https://ghostty.org/docs
+
+# Font Configuration
+font-family = JetBrains Mono
+font-size = 13
+
+# Theme and Colors
+theme = Catppuccin Mocha
+background-opacity = 0.95
+
+# Window Settings
+window-padding-x = 10
+window-padding-y = 10
+
+# Cursor
+cursor-style = block
+
+# Shell Integration
+shell-integration = detect
+link-url = true
+
+# macOS Settings
+macos-option-as-alt = true
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Scrollback
+scrollback-limit = 10000
+
+# Confirmation
+confirm-close-surface = false
+quit-after-last-window-closed = true
