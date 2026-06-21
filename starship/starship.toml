@@ -1,32 +1,33 @@
 format = "$username$hostname$directory$cmd_duration$python$fill$git_branch$git_state$git_status$line_break$character"
 palette = "catppuccin_mocha"
+
 [aws]
-style = "bold #ffb86c"
+style = "bold peach"
 
 [character]
-error_symbol = "[❯](bold #ff5555)"
-success_symbol = "[❯](bold #f8f8f2)"
-vimcmd_symbol = "[❮](bold #f8f8f2)"
+error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold text)"
+vimcmd_symbol = "[❮](bold text)"
 
 [cmd_duration]
 format = "[$duration]($style) "
-style = "bold #f1fa8c"
+style = "bold yellow"
 
 [directory]
-style = "bold #50fa7b"
+style = "bold green"
 
 [fill]
 symbol = " "
 
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style)"
-style = "bold #ff79c6"
+style = "bold pink"
 
 [git_status]
-style = "bold #ff5555"
+style = "bold red"
 
 [hostname]
-style = "bold #ff5555"
+style = "bold maroon"
 
 [palettes.catppuccin_mocha]
 base = "#1e1e2e"
@@ -58,4 +59,4 @@ yellow = "#f9e2af"
 
 [username]
 format = "[$user]($style) on "
-style_user = "bold #bd93f9"
+style_user = "bold mauve"

@@ -1,20 +1,30 @@
 
 typeset -U path cdpath fpath manpath
 
+# Add Homebrew to path (must be before compinit so its completions are found)
+export PATH="/opt/homebrew/bin:$PATH"
+
 # Reevaluate the prompt string each time it's displaying a prompt
 setopt prompt_subst
+if command -v brew &>/dev/null; then
+    fpath+=("$(brew --prefix)/share/zsh/site-functions")
+fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 autoload -Uz compinit && compinit
 
-# Add Homebrew to path
-export PATH="/opt/homebrew/bin:$PATH"
-
 # zsh-autosuggestions - works on both Mac (brew) and Ubuntu
-if command -v brew &> /dev/null; then
-    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if command -v brew &> /dev/null && [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+elif [ -f "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "/etc/profiles/per-user/$USER/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+elif [ -f ~/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ~/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 elif [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
+
+# vi mode (must come before other bindkey calls — it resets the keymap)
+bindkey -v
 
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
@@ -24,12 +34,9 @@ bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
 # Starship Prompt
-eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 export LANG=en_US.UTF-8
-
-# vi mode
-bindkey -v
+eval "$(starship init zsh)"
 
 # Setup Zoxide
 eval "$(zoxide init zsh)"
@@ -110,3 +117,4 @@ export PATH="$PATH:/Users/branden/.lmstudio/bin"
 
 # Added by Antigravity
 export PATH="/Users/branden/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

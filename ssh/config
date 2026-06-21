@@ -1,6 +1,15 @@
+Host astraeus 167.71.87.251
+  HostName 167.71.87.251
+  User branden
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/pureintellect.pub
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+
 Host *
-  SendEnv LANG_LC*
-  MACs hmac-md5,hmac-sha1
+  SendEnv LANG LC_*
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
   ForwardX11 no
   ForwardAgent yes
   AddressFamily inet

@@ -3,3 +3,6 @@
 lazy-lock.json
 lazyvim.json
 .DS_Store
+
+# TPM and tmux plugins are bootstrapped at runtime
+tmux/plugins/
