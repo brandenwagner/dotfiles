@@ -7,5 +7,8 @@ lazy-lock.json
 lazyvim.json
 .DS_Store
 
+# install.sh writes these when it replaces an existing config
+*.bak
+
 # TPM and tmux plugins are bootstrapped at runtime
 tmux/plugins/
