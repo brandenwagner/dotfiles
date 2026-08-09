@@ -71,5 +71,31 @@ else
     echo "  TPM already present"
 fi
 
+echo "==> herdr agent integrations"
+# herdr generates and version-stamps these hook scripts itself, so they are not
+# tracked in this repo -- installing them is a provisioning step instead. Only
+# missing targets are installed, so re-running never rewrites a hook that herdr
+# already manages, and never touches the agent's settings file twice.
+if command -v herdr >/dev/null 2>&1; then
+    herdr_status="$(herdr integration status 2>/dev/null || true)"
+    for target in claude codex; do
+        if [[ -z "$herdr_status" ]]; then
+            echo "  skipped: $target (could not read herdr integration status)"
+        elif print -r -- "$herdr_status" | grep -q "^${target}: not installed"; then
+            if herdr integration install "$target" >/dev/null 2>&1; then
+                echo "  installed: $target"
+            else
+                echo "  WARNING: herdr integration install $target failed" >&2
+            fi
+        else
+            echo "  ok:     $target"
+        fi
+    done
+else
+    # herdr comes from nix-config's shared/home.nix, so it is absent on
+    # standalone hosts. Not an error.
+    echo "  skipped: herdr not on PATH"
+fi
+
 echo ""
 echo "Done. Start a new shell or run: source ~/.zshrc"

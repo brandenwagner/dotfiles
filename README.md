@@ -23,9 +23,24 @@ cd ~/.dotfiles
 ./install.sh
 ```
 
-`install.sh` symlinks each config to the correct location, backs up any existing files as `.bak`, and bootstraps TPM for tmux plugins.
+`install.sh` symlinks each config to the correct location, backs up any existing files as `.bak`, bootstraps TPM for tmux plugins, and installs the herdr agent integrations. It is idempotent — re-running reports `ok:` and changes nothing.
 
 After running, open tmux and press `prefix + I` to install tmux plugins.
+
+### herdr
+
+The herdr binary comes from `nix-config`. Its agent hooks
+(`~/.claude/hooks/herdr-agent-state.sh`, `~/.codex/…`) are **not** tracked here:
+herdr generates and version-stamps them itself, so committing them would pin a
+version the tool expects to upgrade. `install.sh` runs
+`herdr integration install` for any target that reports `not installed`, and
+skips the rest.
+
+`~/.config/herdr/config.toml` is also untracked, since it currently holds no
+real settings and herdr writes to it. If that changes, add it as
+`herdr/config.toml` and point `HERDR_CONFIG_PATH` at it from `zshrc` — the same
+pattern `STARSHIP_CONFIG` uses. Don't symlink the directory: herdr keeps its
+sockets and logs there too.
 
 ## Relationship to `nix-config`
 
