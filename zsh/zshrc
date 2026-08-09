@@ -56,9 +56,16 @@ if command -v fdfind &> /dev/null && ! command -v fd &> /dev/null; then
     alias fd='fdfind'
 fi
 
-#Activate `fzf` : https://github.com/junegunn/fzf 
+#Activate `fzf` : https://github.com/junegunn/fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf >= 0.48 ships its own shell integration; fall back to the legacy file
+if command -v fzf >/dev/null; then
+    if fzf --zsh >/dev/null 2>&1; then
+        eval "$(fzf --zsh)"
+    elif [ -f ~/.fzf.zsh ]; then
+        source ~/.fzf.zsh
+    fi
+fi
 
 # Add Nix profile to path
 export PATH="$HOME/.nix-profile/bin:$PATH"

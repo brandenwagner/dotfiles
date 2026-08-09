@@ -37,5 +37,21 @@ After running, open tmux and press `prefix + I` to install tmux plugins.
 - [fzf](https://github.com/junegunn/fzf) — `brew install fzf`
 - [fd](https://github.com/sharkdp/fd) — `brew install fd`
 - [fnm](https://github.com/Schniz/fnm) — `brew install fnm`
+- [direnv](https://direnv.net) — `brew install direnv`
+- [Neovim](https://neovim.io) — `brew install neovim` (0.11+, for LazyVim)
+- [tmux](https://github.com/tmux/tmux) — `brew install tmux` (3.4+, for `extended-keys`)
+- [Podman](https://podman.io) — `brew install podman`, aliased over `docker`/`docker-compose`
 - [Ghostty](https://ghostty.org) — terminal emulator
-- JetBrains Mono Nerd Font — required by Ghostty and tmux status bar
+
+### Fonts
+
+Ghostty is configured for `JetBrains Mono`, and the tmux status bar uses Nerd
+Font glyphs. Install the patched build so both render:
+
+```zsh
+brew install --cask font-jetbrains-mono-nerd-font
+```
+
+If you install the Nerd Font variant, set `font-family = JetBrainsMono Nerd Font`
+in `ghostty/config`. (On a Nix/home-manager machine the font may already be
+provided outside `~/Library/Fonts` — check before installing a second copy.)
