@@ -98,6 +98,7 @@ unsetopt EXTENDED_HISTORY
 # Aliases
 alias docker=podman
 alias docker-compose='podman compose'
+alias podman-compose='podman compose'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 #alias notes="NVIM_APPNAME=nvim-notes nvim $HOME/Repositories/Personal/obsidian"
 
@@ -114,6 +115,9 @@ alias mat='osascript -e "tell application \"System Events\" to key code 126 usin
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/branden/.lmstudio/bin"
+
+# Podman path
+export PATH="$PATH:/opt/podman/bin"
 
 # Added by Antigravity
 export PATH="/Users/branden/.antigravity/antigravity/bin:$PATH"
