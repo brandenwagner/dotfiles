@@ -1,8 +1,34 @@
 Host astraeus 167.71.87.251
   HostName 167.71.87.251
   User branden
-  IdentitiesOnly yes
   IdentityFile ~/.ssh/pureintellect.pub
+  IdentitiesOnly yes
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+
+Host poseidon poseidon.local
+  HostName poseidon.local
+  User branden
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+
+Host zeus zeus.local
+  HostName zeus.local
+  User branden
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+
+Host tailscale-jump
+  Hostname zeus.tail52d79.ts.net
+  User branden
+
+Host poseidon-tailscale
+  Hostname poseidon.local
+  User branden
+  ProxyJump tailscale-jump
   ControlMaster auto
   ControlPath ~/.ssh/cm-%r@%h:%p
   ControlPersist 10m

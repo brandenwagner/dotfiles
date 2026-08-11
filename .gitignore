@@ -1,8 +1,14 @@
 
 # Dont want lazy updates locked. I might regret this later but lets try it for now
 lazy-lock.json
+
+# LazyVim machine state (enabled extras are declared in lua/plugins/, and the
+# rest is just a NEWS.md read marker)
 lazyvim.json
 .DS_Store
+
+# install.sh writes these when it replaces an existing config
+*.bak
 
 # TPM and tmux plugins are bootstrapped at runtime
 tmux/plugins/

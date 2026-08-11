@@ -56,9 +56,16 @@ if command -v fdfind &> /dev/null && ! command -v fd &> /dev/null; then
     alias fd='fdfind'
 fi
 
-#Activate `fzf` : https://github.com/junegunn/fzf 
+#Activate `fzf` : https://github.com/junegunn/fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf >= 0.48 ships its own shell integration; fall back to the legacy file
+if command -v fzf >/dev/null; then
+    if fzf --zsh >/dev/null 2>&1; then
+        eval "$(fzf --zsh)"
+    elif [ -f ~/.fzf.zsh ]; then
+        source ~/.fzf.zsh
+    fi
+fi
 
 # Add Nix profile to path
 export PATH="$HOME/.nix-profile/bin:$PATH"
@@ -98,6 +105,7 @@ unsetopt EXTENDED_HISTORY
 # Aliases
 alias docker=podman
 alias docker-compose='podman compose'
+alias podman-compose='podman compose'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 #alias notes="NVIM_APPNAME=nvim-notes nvim $HOME/Repositories/Personal/obsidian"
 
@@ -114,6 +122,9 @@ alias mat='osascript -e "tell application \"System Events\" to key code 126 usin
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/branden/.lmstudio/bin"
+
+# Podman path
+export PATH="$PATH:/opt/podman/bin"
 
 # Added by Antigravity
 export PATH="/Users/branden/.antigravity/antigravity/bin:$PATH"
