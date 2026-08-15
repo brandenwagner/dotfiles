@@ -14,7 +14,7 @@ format = "[$duration]($style) "
 style = "bold yellow"
 
 [directory]
-style = "bold green"
+style = "bold lavender"
 
 [fill]
 symbol = " "
