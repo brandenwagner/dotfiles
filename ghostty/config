@@ -6,7 +6,7 @@ font-family = JetBrains Mono
 font-size = 13
 
 # Theme and Colors
-theme = Catppuccin Mocha
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 background-opacity = 0.95
 
 # Window Settings

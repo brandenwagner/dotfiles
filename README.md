@@ -13,6 +13,7 @@ Personal dotfiles for macOS. Managed with symlinks via `install.sh`.
 | `starship/` | Starship prompt |
 | `ghostty/` | Ghostty terminal |
 | `ssh/` | SSH client config |
+| `herdr/` | herdr terminal workspace manager (`config.toml`) |
 | `vscode/` | VSCode custom CSS/JS (requires Custom CSS and JS Loader extension) |
 
 ## Install
@@ -36,11 +37,17 @@ version the tool expects to upgrade. `install.sh` runs
 `herdr integration install` for any target that reports `not installed`, and
 skips the rest.
 
-`~/.config/herdr/config.toml` is also untracked, since it currently holds no
-real settings and herdr writes to it. If that changes, add it as
-`herdr/config.toml` and point `HERDR_CONFIG_PATH` at it from `zshrc` — the same
-pattern `STARSHIP_CONFIG` uses. Don't symlink the directory: herdr keeps its
-sockets and logs there too.
+The settings file lives here as `herdr/config.toml`, and `zshrc` exports
+`HERDR_CONFIG_PATH` to point at it — the same pattern `STARSHIP_CONFIG` uses.
+It is reached by env var rather than a symlink because herdr keeps its sockets,
+logs and session state in `~/.config/herdr/` too, so that directory can't be
+linked wholesale. Anything herdr writes back lands directly in the repo, where
+`git status` will show it.
+
+Because the path comes from `zshrc`, herdr must be launched from a shell that
+sourced it; started from anywhere else it falls back to
+`~/.config/herdr/config.toml`. Check with `herdr config check` and
+`echo $HERDR_CONFIG_PATH`.
 
 ## Relationship to `nix-config`
 
