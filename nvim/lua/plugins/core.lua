@@ -40,8 +40,11 @@ return {
     },
   },
 
-  -- typescript support via LazyVim extras
-  { import = "lazyvim.plugins.extras.lang.typescript" },
+  -- typescript, json, and mini.starter support come from LazyVim extras enabled
+  -- in lazyvim.json (not imported here directly — LazyVim's own xtras.lua merges
+  -- and priority-orders extras so they patch correctly against other default
+  -- extras like the snacks picker; a manual `{ import = ... }` here runs too late
+  -- and crashes mini.starter's config).
 
   -- add more treesitter parsers
   {
@@ -63,12 +66,6 @@ return {
       })
     end,
   },
-
-  -- use mini.starter instead of alpha
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
-
-  -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-  { import = "lazyvim.plugins.extras.lang.json" },
 
   -- add any tools you want to have installed below
   {
