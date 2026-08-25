@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Create 4 herdr worktrees on the konstellation repo, one per workstream,
-# and rename each worktree's first pane to match the worktree name.
+# rename each worktree's first pane to match the worktree name, and launch
+# a Claude Code instance in that pane.
 #
 # Requires: herdr CLI (HERDR_ENV=1), jq
 set -euo pipefail
@@ -24,19 +25,19 @@ if [[ -n "$BASE_REF" ]]; then
   BASE_REF="origin/${BASE_REF}"
 fi
 
-# name:branch pairs — fill in real branch names as needed
+# name:branch:subdir triples — subdir is where Claude is launched, relative
+# to the worktree root
 WORKTREES=(
-  "tprm:tprm"
-  "access:access"
-  "devices:devices"
-  "help-desk:help-desk"
+  "tprm:tprm:services/tprm-app"
+  "access:access:services/access-app"
+  "devices:devices:services/devices-app"
+  "help-desk:help-desk:services/help-desk-app"
 )
 
 existing_branches="$(herdr worktree list --cwd "$REPO_CWD" | jq -r '.result.worktrees[].branch')"
 
 for entry in "${WORKTREES[@]}"; do
-  name="${entry%%:*}"
-  branch="${entry##*:}"
+  IFS=':' read -r name branch subdir <<<"$entry"
 
   if grep -qxF "$branch" <<<"$existing_branches"; then
     echo "==> skipping '${name}': a worktree for branch '${branch}' already exists"
@@ -53,14 +54,21 @@ for entry in "${WORKTREES[@]}"; do
   response="$(herdr "${args[@]}")"
 
   pane_id="$(jq -r '.result.root_pane.pane_id // .result.pane.pane_id // empty' <<<"$response")"
+  worktree_path="$(jq -r '.result.worktree.path // empty' <<<"$response")"
 
-  if [[ -z "$pane_id" ]]; then
-    echo "error: could not determine pane id for worktree '${name}'" >&2
+  if [[ -z "$pane_id" || -z "$worktree_path" ]]; then
+    echo "error: could not determine pane id or worktree path for worktree '${name}'" >&2
     echo "$response" >&2
     exit 1
   fi
 
+  launch_dir="$worktree_path"
+  if [[ -n "$subdir" ]]; then
+    launch_dir="${worktree_path}/${subdir}"
+  fi
+
   herdr pane rename "$pane_id" "$name"
+  herdr pane run "$pane_id" bash -lc "cd \"$launch_dir\" && exec claude --remote-control \"$name\""
 
   echo "==> worktree '${name}' ready (pane: ${pane_id})"
 done
