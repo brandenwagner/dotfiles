@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Create 4 herdr worktrees on the konstellation repo, one per workstream,
+# Create 4 herdr worktrees on the kortex repo, one per workstream,
 # rename each worktree's first pane to match the worktree name, and launch
 # a Claude Code instance in that pane.
 #
@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # --- fill in for your environment -------------------------------------
-REPO_CWD="/Users/branden/Repositories/Mercury/konstellation" # cwd inside the konstellation repo (used to resolve --cwd for each worktree)
+REPO_CWD="/Users/branden/Repositories/Mercury/kortex" # cwd inside the kortex repo (used to resolve --cwd for each worktree)
 BASE_REF="main"                                              # e.g. "main" — leave empty to use herdr's default (skips the fetch/up-to-date guarantee below)
 # ------------------------------------------------------------------------
 
