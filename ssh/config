@@ -33,6 +33,13 @@ Host poseidon-tailscale
   ControlPath ~/.ssh/cm-%r@%h:%p
   ControlPersist 10m
 
+# In a forwarded-agent session (ssh -A), use the forwarded agent.
+# Without this, the Host * IdentityAgent below overrides SSH_AUTH_SOCK and ssh
+# talks to the local 1Password agent, which cannot sign without desktop approval.
+# The ${VAR+y} form is used because SSH_CONNECTION contains spaces.
+Match exec "test x${SSH_CONNECTION+y}${SSH_AUTH_SOCK+y} = xyy"
+  IdentityAgent $SSH_AUTH_SOCK
+
 Host *
   SendEnv LANG LC_*
   MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com

@@ -1,0 +1,5 @@
+# Run by sshd on every login. Point a stable path at this connection's forwarded
+# agent so long-lived shells (herdr panes) survive reconnects; see ~/.zshrc.
+if [ -n "$SSH_AUTH_SOCK" ] && [ -S "$SSH_AUTH_SOCK" ]; then
+  ln -sfn "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
+fi
