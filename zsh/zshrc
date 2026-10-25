@@ -102,6 +102,12 @@ unsetopt HIST_EXPIRE_DUPS_FIRST
 setopt SHARE_HISTORY
 unsetopt EXTENDED_HISTORY
 
+# In SSH sessions, use the stable agent link maintained by ~/.ssh/rc so shells that
+# outlive a connection (herdr panes) keep working after a reconnect.
+if [[ -n $SSH_CONNECTION && -L $HOME/.ssh/ssh_auth_sock ]]; then
+  export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+fi
+
 # Aliases
 alias docker=podman
 alias docker-compose='podman compose'

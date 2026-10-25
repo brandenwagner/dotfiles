@@ -12,3 +12,6 @@ lazyvim.json
 
 # TPM and tmux plugins are bootstrapped at runtime
 tmux/plugins/
+
+# agentic-security plugin state
+.agentic-security/

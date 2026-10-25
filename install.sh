@@ -61,6 +61,7 @@ symlink "$DOTFILES/ghostty" "$HOME/.config/ghostty"
 echo "==> ssh"
 symlink "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 chmod 600 "$HOME/.ssh/config"
+symlink "$DOTFILES/ssh/rc" "$HOME/.ssh/rc"
 
 echo "==> tmux plugin manager (TPM)"
 TPM_DIR="$HOME/.config/tmux/plugins/tpm"
